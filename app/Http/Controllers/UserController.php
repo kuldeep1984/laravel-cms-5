@@ -32,7 +32,7 @@ class UserController extends Controller {
      * @return Response
      */
     public function index(Request $request) {
-
+        
         if (Request::isMethod('post')) {
 
             $empid = trim(Request::input('empid'));

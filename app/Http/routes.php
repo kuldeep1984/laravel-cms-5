@@ -32,6 +32,8 @@ Route::get('refresh-locality', 'SuggestAutoController@refreshLocality');
 Route::get('refresh-suburb', 'SuggestAutoController@refreshSuburb');
 Route::get('refresh-projectType', 'SuggestAutoController@refreshProjectType');
 Route::get('search-company-term', 'SuggestAutoController@getCompanyNamesByTypeTerm');
+Route::get('get-Builder-Image', 'SuggestAutoController@getBuilderImage');
+Route::get('get-builder-jv', 'SuggestAutoController@getBuilderJV');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -1,4 +1,67 @@
     jQuery(document).ready(function () {
+        
+        $('#ConstructionContractor').autocomplete({
+            source: "/search-company-term?type=ConstructionContractor",
+            minLength : 1,
+            select: function(event, ui){  
+                console.log(ui.item);
+                if ($('#ConstructionContractorId').length) {                    
+                    $("#ConstructionContractorId").val(ui.item.company_id);                    
+                }
+                if ($('#ConstructionContractor').length) {                    
+                    $("#ConstructionContractor").val(ui.item.value);                    
+                }
+                
+            },            
+            response: function(event, ui){                
+                if(ui.content.length == 0){                 
+                    $("#ConstructionContractorId").val(''); 
+                    $("#ConstructionContractor").val('');
+                }
+            }
+        });
+        
+        $('#MaintenanceContractor').autocomplete({
+            source: "/search-company-term?type=MaintenanceContractor",
+            minLength : 1,
+            select: function(event, ui){  
+                console.log(ui.item);
+                if ($('#MaintenanceContractorId').length) {                    
+                    $("#MaintenanceContractorId").val(ui.item.company_id);                    
+                }
+                if ($('#MaintenanceContractor').length) {                    
+                    $("#MaintenanceContractor").val(ui.item.value);                    
+                }
+                
+            },            
+            response: function(event, ui){                
+                if(ui.content.length == 0){                 
+                    $("#MaintenanceContractorId").val(''); 
+                    $("#MaintenanceContractor").val('');
+                }
+            }
+        });
+        
+        $('#LandscapeArchitect').autocomplete({
+            source: "/search-company-term?type=LandscapeArchitect",
+            minLength : 1,
+            select: function(event, ui){  
+                console.log(ui.item);
+                if ($('#LandscapeArchitectId').length) {                    
+                    $("#LandscapeArchitectId").val(ui.item.company_id);                    
+                }
+                if ($('#LandscapeArchitect').length) {                    
+                    $("#LandscapeArchitect").val(ui.item.value);                    
+                }
+                
+            },            
+            response: function(event, ui){                
+                if(ui.content.length == 0){                 
+                    $("#LandscapeArchitectId").val(''); 
+                    $("#LandscapeArchitect").val('');
+                }
+            }
+        });
          
         $('#projectsearch').autocomplete({
             source: "/suggest-auto?mode=city&type=projectName&id="+$('#citydd').val(),

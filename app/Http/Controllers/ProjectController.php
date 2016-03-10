@@ -14,6 +14,7 @@ use app\Models\City;
 use DB;
 use Session;
 use Auth;
+use app\Http\Requests\createProjectFormRequest;
 
 class ProjectController extends Controller {
 
@@ -181,6 +182,7 @@ class ProjectController extends Controller {
      * @return Response
      */
     public function create() {
+        
         return view('project.create')
                 ->with('projectTypes', \app\Models\ResiProjectType::getProjectTypesByType('Residential'))
                 ->with('projectStatus', ProjectStatusMaster::projectStatusMaster())
@@ -194,8 +196,47 @@ class ProjectController extends Controller {
      *
      * @return Response
      */
-    public function store(Request $request) {
-        dd($request->all());
+    public function store(createProjectFormRequest $request) {
+        
+        
+        if($request->input('btnSave')){
+            dd($request->all());
+            $project = new \app\Models\ResiProject;
+            
+            $project->project_name = replaceSpaces(trim($request->input('txtProjectName')));
+            $project->builder_id = trim($request->input('builderId'));
+            $project->locality_id = trim($request->input('localityId'));
+            $project->project_description = trim($request->input('txtProjectDesc'));
+            $project->comments = trim($request->input('comments'));
+            $project->project_address = trim($request->input('txtProjectAddress'));
+            $project->latitude = trim($request->input('txtProjectLattitude'));
+            $project->longitude = trim($request->input('txtProjectLongitude'));
+            $project->display_order = config('cms_contants.PROJECT_MAX_PRIORITY');
+            $project->status = trim($request->input('Active'));
+            $project->project_url = '';
+            $project->pre_launch_date = trim($request->input('pre_launch_date'));
+            $project->launch_date = trim($request->input('eff_date_to'));
+            $project->source_of_information = trim($request->input('txtProjectSource'));
+            $project->application_form = '';
+            $project->approvals = trim($request->input('approvals'));
+            $project->project_size = trim($request->input('project_size'));
+            $project->power_backup_type_id = trim($request->input('powerBackup'));
+            $project->project_type_id = trim($request->input('optionType'));
+            $project->architect_name = trim($request->input('architect'));
+            $project->power_backup_capacity = trim($request->input('power_backup_capacity'));
+            $project->promised_completion_date = trim($request->input('eff_date_to_prom'));
+            $project->residential_flag = trim($request->input('residential'));
+            $project->township_id = trim($request->input('township'));
+            $project->open_space = trim($request->input('open_space'));
+            $project->project_status_id = trim($request->input('Status'));
+            $project->should_display_price = trim($request->input('shouldDisplayPrice'));
+            $project->expected_supply_date = trim($request->input('exp_launch_date'));
+            $project->updated_by = Auth::user()->ADMINID;
+            $project->no_of_towers = trim($request->input('numberOfTowers'));           
+            $project->is_smoothed = trim($request->input('is_smoothed'));            
+            
+        }
+        
         return ('stroe');
     }
 
