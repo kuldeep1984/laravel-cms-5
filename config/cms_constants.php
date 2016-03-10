@@ -56,5 +56,6 @@ return [
 		"48"=>"Pondicherry",
 		"61"=>"Vijayawada",
 		"91"=>"Karnal"
-            ]
+            ],
+    'PROJECT_MAX_PRIORITY' => '999'
 ];

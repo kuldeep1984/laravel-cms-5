@@ -2,6 +2,7 @@
 
 @section('content')
 <script type="text/javascript" src="{{ asset('/js/suggest_auto.js') }}"></script>
+<script type="text/javascript" src="{{asset('/js/common.js')}}"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -22,6 +23,8 @@
                             </td>
                             <td>
                                 <ul>
+                                  
+
                                     @foreach ($errors->all() as $error)
                                     <li class="error">{{ $error }}</li>
                                     @endforeach
@@ -34,6 +37,15 @@
                             <td width="30%" align="left">
                                 <input type="text" name="txtProjectName" id="txtProjectName" value="{{Request::old('txtProjectName')}}" style="width:357px;" />
                             </td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('txtProjectName'))
+                                        Project Name is required.
+                                    @endif
+                                    <span id = "err_project_name" style = "display:none;">Please enter project name!</span>
+                                </font>
+                                <span id="builderbox" style="clear:both;float:right"></span>
+                            </td>
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
                         <tr>
@@ -44,6 +56,15 @@
                                 <input type="hidden" name="builderId" class="builderId" value="{{Request::old('builderId')}}">
 
                             </td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    <span id="builderJVbox"></span>
+                                    @if($errors->has('builderName'))
+                                        Builder Name is required.
+                                    @endif
+                                    <span id = "err_builder_id" style = "display:none;">Please select builder name!</span>
+                                </font>                                
+                            </td>
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
                         <tr>
@@ -52,6 +73,14 @@
                                 <input type="text" id="cityName" name="cityName" value="{{Request::old('cityName')}}"/>
                                 <input type="hidden" id="cityId" name="cityId" value="{{Request::old('cityId')}}"/>
 
+                            </td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('cityName'))
+                                        City Name is required.
+                                    @endif
+                                    <span id = "err_city_id" style = "display:none;">Please select city!</span>
+                                </font>
                             </td>
 
                         </tr>
@@ -63,6 +92,14 @@
                                     <option value="">Select Locality</option>
 
                                 </select>
+                            </td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('localityId'))
+                                        locality is required.
+                                    @endif
+                                    <span id = "err_locality_id" style = "display:none;">Please select locality!</span>
+                                </font>
                             </td>
                         </tr>	
                         <tr><td colspan='2'>&nbsp;</td></tr>
@@ -86,6 +123,13 @@
                                 @if(Auth::user()->DEPARTMENT == 'CONTENT' || Auth::user()->DEPARTMENT == 'ADMINISTRATOR')
                                     <input type="checkbox" name="content_flag" @if(Request::old('contentFlag')) checked @endif/> Reviewed?
                                 @endif
+                            </td>
+                             <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('txtProjectDesc'))
+                                        Project Description is required.
+                                    @endif
+                                </font>
                             </td>
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
@@ -161,6 +205,15 @@
                         <tr>
                             <td width="20%" align="right"><font color ="red">*</font><b>Project Address :</b> </td>
                             <td width="30%" align="left"><input type="text" name="txtProjectAddress" id="txtProjectAddress" value="{{Request::old('$txtAddress')}}" style="width:360px;" /></td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('txtProjectAddress'))
+                                        Project Address is required.
+                                    @endif
+                                    <span id = "err_project_address" style = "display:none;">Please enter project address!</span>
+                                </font>
+                                
+                            </td>
 
                         </tr>	
                         <tr><td colspan='2'>&nbsp;</td></tr>
@@ -173,6 +226,15 @@
                         <tr>
                             <td width="20%" align="right"><font color ="red">*</font><b>Source of Information :</b> </td>
                             <td width="30%" align="left"><input type="text" name="txtProjectSource" id="txtProjectSource" value="{{Request::old('txtSourceofInfo')}}" style="width:360px;" /></td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('txtProjectSource'))
+                                        Source of Information is required.
+                                    @endif
+                                     <span id = "err_project_source" style = "display:none;">Please enter project source of information!</span>
+                                </font>
+                               
+                            </td>
 
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
@@ -196,7 +258,15 @@
                                         <option value="{{$key}}">{{$value}}</option>
                                     @endforeach
                                 </select>
-                            </td>                            
+                            </td>       
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('project_type'))
+                                        Project type  is required.
+                                    @endif
+                                    <span id = "err_project_type" style ="display:none;">Please select project type!</span>
+                                </font>
+                            </td>
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
                         <tr>
@@ -227,6 +297,14 @@
                                     @endif
                                 </select>
                             </td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('Active'))
+                                        Active  is required.
+                                    @endif
+                                    <span id = "err_project_active" style = "display:none;"></span>
+                                </font>
+                            </td>
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
                         <tr>
@@ -239,6 +317,14 @@
                                     @endforeach
 
                                 </select>
+                            </td>
+                            <td width="50%" align="left">
+                                <font color="red">
+                                    @if($errors->has('Status'))
+                                        Project Status  is required.
+                                    @endif
+                                    <span id = "err_project_status" style = "display:none;">Please select project status!</span>
+                                </font>
                             </td>
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
@@ -385,21 +471,24 @@
                         <tr>
                             <td width="20%" align="right" valign="top"><b>Construction Contractor: </b></td>
                             <td width="30%" align="left" valign="top">
-                                <input type = "text" name = "ConstructionContractor" id = "ConstructionContractor" value = "" style ="width:360px;" data-id="ConstructionContractorId" class="company-type">                                                   
+                                <input type = "text" name = "ConstructionContractor" id = "ConstructionContractor" value = "" style ="width:360px;" class="company-type"> 
+                                <input type = "hidden" name = "ConstructionContractorId" id = "ConstructionContractorId" value = "" />
                             </td>                                             
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
                         <tr>
                             <td width="20%" align="right" valign="top"><b>Maintenance Contractor: </b></td>
                             <td width="30%" align="left" valign="top">
-                                <input type = "text" name = "MaintenanceContractor" id = "MaintenanceContractor" value = "" style ="width:360px;" data-id="MaintenanceContractorId" class="company-type">
+                                <input type = "text" name = "MaintenanceContractor" id = "MaintenanceContractor" value = "" style ="width:360px;" class="company-type">
+                                <input type = "hidden" name = "MaintenanceContractorId" id = "MaintenanceContractorId" value = "" />
                             </td>                                                
                         </tr>
                         <tr><td colspan='2'>&nbsp;</td></tr>
                         <tr>
                             <td width="20%" align="right" valign="top"><b>Landscape Architect: </b></td>
                             <td width="30%" align="left" valign="top">
-                                <input type = "text" name = "LandscapeArchitect" id = "LandscapeArchitect" value = "" style ="width:360px;" data-id="LandscapeArchitectId" class="company-type">
+                                <input type = "text" name = "LandscapeArchitect" id = "LandscapeArchitect" value = "" style ="width:360px;"  class="company-type">
+                                <input type = "hidden" name = "LandscapeArchitectId" id = "LandscapeArchitectId" value = "" >
 
                             </td>                                                
                         </tr>
@@ -448,7 +537,7 @@
                         <tr>
                             <td width="20%" align="left"></td>
                             <td width="30%" align="left">
-                                <input class="btn" type="submit" name="btnSave" id="btnSave" value="Save">
+                                <input class="btn" type="submit" name="btnSave" id="btnSave" value="Next" onclick = "return project_scn1('{{getenv('FIND_ERRORS_URL')}}');">
                                 &nbsp;&nbsp;
                                 {!! link_to(url('/projectList'), 'Exit', ['class' => 'btn btn-default']) !!} 
 
@@ -471,6 +560,38 @@
         editor_selector: "myTextEditor",
         theme: "advanced"
     });
+     function getBuilderImage() {
+            var builderid = $('.builderId').val();
+            $.ajax({
+                type: "GET",
+                url: "/get-Builder-Image",
+                data: 'part=builderImage&builderid=' + builderid,
+                dataType: "html",
+                success: function (responsedata) {
+                    //alert(responsedata);
+                    console.log(responsedata);
+                    var splitArr = responsedata.split("@@");
+                    $("#builderbox").html('<img alt=' + splitArr[0] + ' src=' + splitArr[1] + ' align="left" style="width: 100px; height: 40px; margin-right:10px; border:solid 1px #CCC;">');
+                }
+            });
+        }
+      function getBuilderJV() {
+        var builderid = $('.builderId').val();
+        $.ajax({
+            type: "GET",
+            url: "/get-builder-jv",
+            data: 'part=builderJV&builderid=' + builderid,
+            dataType: "html",
+            success: function (responsedata) {              
+                console.log(responsedata);  
+                if(responsedata.trim()){
+                    $("#builderJVbox").html('This builder is in JV with ' + responsedata);
+                }else{
+                    $("#builderJVbox").html('');
+                }                
+            }
+        });
+    }
     function update_locality(ctid) {
         $(".suburbId").html('');
         $.ajax({
